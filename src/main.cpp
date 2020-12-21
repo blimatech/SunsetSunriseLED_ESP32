@@ -13,8 +13,12 @@
 #define LED 2
 
 //Wifi
-const char *WIFI_SSID = "NOS-DCE0";
-const char *WIFI_PASSWORD = "a0966c563a8c";
+//Home credencials
+//const char *WIFI_SSID = "NOS-DCE0";
+//const char *WIFI_PASSWORD = "a0966c563a8c";
+const char *WIFI_SSID = "M4I";
+const char *WIFI_PASSWORD = "M4Ilda18";
+
 const char *charJSON;
 
 //time
