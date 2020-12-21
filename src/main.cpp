@@ -7,10 +7,8 @@
 //Included libraries
 #include <WiFi.h>
 #include <HTTPClient.h>
-#include <ArduinoJson.h>
 #include <time.h>
-#include <NTPClient.h>
-#include <WiFiUdp.h>
+#include <ArduinoJson.h>
 
 //Onboard LEd used to show when it is night
 #define LED 2
@@ -19,6 +17,7 @@
 //Home credentials
 const char *WIFI_SSID = "NOS-DCE0";
 const char *WIFI_PASSWORD = "a0966c563a8c";
+//M4I credentials
 //const char *WIFI_SSID = "M4I";
 //const char *WIFI_PASSWORD = "M4Ilda18";
 
@@ -29,9 +28,6 @@ const char *charJSON;
 const char* ntpServer = "pool.ntp.org";
 const long  gmtOffset_sec = 0;
 const int   daylightOffset_sec = 3600;
-// Define NTP Client to get time
-WiFiUDP ntpUDP;
-NTPClient timeClient(ntpUDP);
 
 //Variables for local time
 int localHours, localMinutes;
@@ -80,8 +76,6 @@ void printLocalTime(){
 
   Serial.print("Hour: ");
   Serial.println(&timeinfo, "%H");
-  Serial.print("Hour (12 hour format): ");
-  Serial.println(&timeinfo, "%I");
   Serial.print("Minute: ");
   Serial.println(&timeinfo, "%M");
 
