@@ -8,12 +8,14 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <time.h>
+#include "NTPClient.h"
+#include <WiFiUdp.h>
 
 //Onboard LEd used to show when it is night
 #define LED 2
 
 //Wifi
-//Home credencials
+//Home credentials
 //const char *WIFI_SSID = "NOS-DCE0";
 //const char *WIFI_PASSWORD = "a0966c563a8c";
 const char *WIFI_SSID = "M4I";
@@ -25,6 +27,9 @@ const char *charJSON;
 const char* ntpServer = "pool.ntp.org";
 const long  gmtOffset_sec = 0;
 const int   daylightOffset_sec = 3600;
+// Define NTP Client to get time
+WiFiUDP ntpUDP;
+NTPClient timeClient(ntpUDP);
 
 //Variables for local time
 int localHours, localMinutes;
@@ -105,6 +110,7 @@ void setup() {
 
 //LOOP
 void loop() {
+    printLocalTime();
     HTTPClient http;
     //http request to know the sunrise and sunset of Funchal in Madeira Island
     String json = httpGETRequest("https://api.sunrise-sunset.org/json?lat=32.6511&lng=-16.9097&date=today");
