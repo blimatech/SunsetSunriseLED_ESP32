@@ -1,6 +1,7 @@
 /*
     Author: Bruno Lima
     Description: Turn on the builtin led of a ESP32 board when we have the sunset and turn off on the sunrise
+    Details: Project based on the examples provided by Rui Santos at Random Nerd Tutorials
 */
 
 //Included libraries
@@ -21,6 +22,7 @@ const char *WIFI_PASSWORD = "a0966c563a8c";
 //const char *WIFI_SSID = "M4I";
 //const char *WIFI_PASSWORD = "M4Ilda18";
 
+//Variable used to convert the string into const char so that we can use ArduinoJson library
 const char *charJSON;
 
 //time
@@ -109,13 +111,14 @@ void setup() {
 
 //LOOP
 void loop() {
+    //Call the function to update the time and pass them to the variables
     printLocalTime();
-    HTTPClient http;
+
     //http request to know the sunrise and sunset of Funchal in Madeira Island
+    HTTPClient http;
     String json = httpGETRequest("https://api.sunrise-sunset.org/json?lat=32.6511&lng=-16.9097&date=today");
     Serial.println("=================================================");
-
-    //USing the ArduinoJson libray to convert to a Json object
+    //Using the ArduinoJson libray to convert to a Json object
     charJSON = json.c_str();
     DynamicJsonDocument doc(768);
     deserializeJson(doc, charJSON);
@@ -156,7 +159,7 @@ void loop() {
 
     //Calculate if we should turn ON the LED or not
     totalSunrise = (sunriseHours * 60) + sunriseMinutes;
-    totalSunset = (sunsetHours + 12) * 60 + sunsetMinutes;
+    totalSunset = (sunsetHours + 12) * 60 + sunsetMinutes; //Adding 12 because it is PM time
     totalLocalTime = (localHours * 60)  + localMinutes;
     if (!(totalLocalTime > totalSunrise && totalLocalTime < totalSunset)) {
         digitalWrite(LED,HIGH);
@@ -172,8 +175,7 @@ void loop() {
     Serial.print(totalLocalTime);
     Serial.println();
 
-    // Disconnect
-    http.end();
-    delay(60000);
+    http.end(); // Disconnect
+    delay(60000); //Wait 1 minute
 }
 //END LOOP
