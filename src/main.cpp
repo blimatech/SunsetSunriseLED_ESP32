@@ -1,6 +1,6 @@
 /*
     Author: Bruno Lima
-    Description: Turn on or off the built in led of a ESP32 board
+    Description: Turn on the builtin led of a ESP32 board when we have the sunset and turn off on the sunrise
 */
 
 //Included libraries
@@ -28,7 +28,7 @@ int localHours, localMinutes;
 int sunriseHours, sunriseMinutes;
 //Variables for sunset
 int sunsetHours, sunsetMinutes;
-//Temp  string
+//Temp string and total times in minutes
 String temp;
 int totalSunrise, totalSunset,totalLocalTime;
 
@@ -92,8 +92,7 @@ void setup() {
     Serial.println("");
     Serial.print("Connected to WiFi network with IP Address: ");
     Serial.println(WiFi.localIP());
-
-    Serial.println(            "Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
+    Serial.println("Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
     // Init and get the time
     configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
     printLocalTime();
@@ -103,10 +102,12 @@ void setup() {
 //LOOP
 void loop() {
     HTTPClient http;
+    //http request to know the sunrise and sunset of Funchal in Madeira Island
     String json = httpGETRequest("https://api.sunrise-sunset.org/json?lat=32.6511&lng=-16.9097&date=today");
     Serial.println("=================================================");
-    charJSON = json.c_str();
 
+    //USing the ArduinoJson libray to convert to a Json object
+    charJSON = json.c_str();
     DynamicJsonDocument doc(768);
     deserializeJson(doc, charJSON);
 
@@ -166,6 +167,4 @@ void loop() {
     // Disconnect
     http.end();
     delay(60000);
-
 }
-
