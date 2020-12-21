@@ -93,9 +93,7 @@ void setup() {
     Serial.print("Connected to WiFi network with IP Address: ");
     Serial.println(WiFi.localIP());
 
-    Serial.println(
-            "Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
-    
+    Serial.println(            "Timer set to 5 seconds (timerDelay variable), it will take 5 seconds before publishing the first reading.");
     // Init and get the time
     configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
     printLocalTime();
