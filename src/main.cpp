@@ -8,7 +8,7 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <time.h>
-#include "NTPClient.h"
+#include <NTPClient.h>
 #include <WiFiUdp.h>
 
 //Onboard LEd used to show when it is night
@@ -153,7 +153,6 @@ void loop() {
     sunsetHours = temp.toInt();
     temp = results_sunset[02];
     temp += results_sunset[03];
-    Serial.println(temp);
     sunsetMinutes = temp.toInt();
 
     //Calculate if we should turn ON the LED or not
