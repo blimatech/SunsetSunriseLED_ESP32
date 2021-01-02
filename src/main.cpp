@@ -1,5 +1,5 @@
 /*
-    Author: Bruno Lima
+    Author: Marisa Lima
     Description: Turn on the builtin led of a ESP32 board when we have the sunset and turn off on the sunrise
     Details: Project based on the examples provided by Rui Santos at Random Nerd Tutorials
 */
@@ -15,8 +15,8 @@
 
 //Wifi
 //Home credentials
-const char *WIFI_SSID = "NOS-DCE0";
-const char *WIFI_PASSWORD = "a0966c563a8c";
+const char *WIFI_SSID = "YOUR SSID NETWORK NAME";
+const char *WIFI_PASSWORD = "YOUR PASSWORD";
 //M4I credentials
 //const char *WIFI_SSID = "M4I";
 //const char *WIFI_PASSWORD = "M4Ilda18";
