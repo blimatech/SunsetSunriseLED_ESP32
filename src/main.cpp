@@ -17,9 +17,6 @@
 //Home credentials
 const char *WIFI_SSID = "YOUR SSID NETWORK NAME";
 const char *WIFI_PASSWORD = "YOUR PASSWORD";
-//M4I credentials
-//const char *WIFI_SSID = "M4I";
-//const char *WIFI_PASSWORD = "M4Ilda18";
 
 //Variable used to convert the string into const char so that we can use ArduinoJson library
 const char *charJSON;
